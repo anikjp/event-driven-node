@@ -1,0 +1,30 @@
+# Logs #
+/logs
+*.log
+*.log*
+
+# Node files #
+node_modules/
+npm-debug.log
+yarn-error.log
+.env
+
+.DS_Store
+Thumbs.db
+.tmp/
+
+# Typing #
+typings/
+
+# Dist #
+dist/
+tsconfig.build.json
+
+# IDE #
+.idea/
+.vscode/
+
+# Generated source-code #
+src/**/*.js
+src/**/*.js.map
+!src/public/**/*
