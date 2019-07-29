@@ -4,7 +4,7 @@ module.exports = {
     scripts: {
         default: 'nps start',
         start: {
-            script: 'cross-env NODE_ENV=development node dist/app.js',
+            script: 'cross-env NODE_ENV=production node dist/app.js',
             description: 'Starts the builded app',
         },
         serve: {
