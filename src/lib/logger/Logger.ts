@@ -52,10 +52,13 @@ export class Logger {
 
     private log(level: string, message: string, args: any[]): void {
         if (winston) {
-            winston[level](`${this.formatScope()} ${message}`, args);
+            winston[level](`${this.timeStamp()} ${this.formatScope()} ${message}`, args);
         }
     }
 
+    private timeStamp(): string {
+        return `[${new Date().toLocaleString()}]`;
+    }
     private formatScope(): string {
         return `[${this.scope}]`;
     }

@@ -4,7 +4,7 @@ import {
 
 import { Logger, LoggerInterface } from '../../decorators/Logger';
 import { UserNotFoundError } from '../errors/UserNotFoundError';
-import { User } from '../models/User';
+import { UserAccount } from '../models/UserAccount';
 import { UserService } from '../services/UserService';
 
 @JsonController('/users')
@@ -17,33 +17,33 @@ export class UserController {
 
     @Authorized()
     @Get()
-    public find(): Promise<User[]> {
+    public find(): Promise<UserAccount[]> {
         return this.userService.find();
     }
 
     @Authorized()
     @Get('/me')
-    public findMe(@Req() req: any): Promise<User[]> {
+    public findMe(@Req() req: any): Promise<UserAccount[]> {
         return req.user;
     }
 
     @Authorized()
     @Get('/:id')
     @OnUndefined(UserNotFoundError)
-    public one(@Param('id') id: string): Promise<User | undefined> {
+    public one(@Param('id') id: string): Promise<UserAccount | undefined> {
         this.log.info('Create a new id => ', id);
         return this.userService.findOne(id);
     }
 
     @Post()
-    public create(@Body() user: User): Promise<User> {
+    public create(@Body() user: UserAccount): Promise<UserAccount> {
         this.log.info('Create a new user => ', user);
         return this.userService.create(user);
     }
 
     @Authorized()
     @Put('/:id')
-    public update(@Param('id') id: string, @Body() user: User): Promise<User> {
+    public update(@Param('id') id: string, @Body() user: UserAccount): Promise<UserAccount> {
         return this.userService.update(id, user);
     }
 

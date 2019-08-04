@@ -23,7 +23,8 @@ module.exports = {
         },
         setup: {
             script: series(
-                'yarn install'
+                'yarn install',
+                'nps db.setup',
             )
         },
         config: {
@@ -99,10 +100,27 @@ module.exports = {
                 hiddenFromHelp: true
             }
         },
+        db: {
+            migrate: {
+                script: series(
+                    'nps banner.migrate',
+                    'nps config',
+                    runFast('./node_modules/typeorm/cli.js migration:run')
+                ),
+                description: 'Migrates the database to newest version available'
+            },
+            setup: {
+                script: series(
+                    'nps db.migrate',
+                ),
+                description: 'Recreates the database with seeded data'
+            }
+        },
         banner: {
             build: banner('build'),
             serve: banner('RENTME-API'),
             revert: banner('revert'),
+            migrate: banner('migrate'),
             clean: banner('clean')
         }
     }

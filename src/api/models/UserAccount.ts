@@ -1,9 +1,13 @@
 import * as bcrypt from 'bcrypt';
 import { IsNotEmpty } from 'class-validator';
-import { BeforeInsert, Column, Entity, PrimaryColumn } from 'typeorm';
+import { BeforeInsert, BeforeUpdate, Column, Entity, PrimaryColumn } from 'typeorm';
+
+import { Logger } from '../../lib/logger';
+
+const log = new Logger(__filename);
 
 @Entity()
-export class User {
+export class UserAccount {
 
     public static hashPassword(password: string): Promise<string> {
         return new Promise((resolve, reject) => {
@@ -16,8 +20,9 @@ export class User {
         });
     }
 
-    public static comparePassword(user: User, password: string): Promise<boolean> {
+    public static comparePassword(user: UserAccount, password: string): Promise<boolean> {
         return new Promise((resolve, reject) => {
+            log.info('password => ', password);
             bcrypt.compare(password, user.password, (err, res) => {
                 resolve(res === true);
             });
@@ -26,6 +31,10 @@ export class User {
 
     @PrimaryColumn('uuid')
     public id: string;
+
+    @IsNotEmpty()
+    @Column()
+    public username: string;
 
     @IsNotEmpty()
     @Column({ name: 'first_name' })
@@ -44,16 +53,27 @@ export class User {
     public password: string;
 
     @IsNotEmpty()
-    @Column()
-    public username: string;
+    @Column({ name: 'create_date', type: 'timestamp'  })
+    public createdAt: Date;
+
+    @IsNotEmpty()
+    @Column({ name: 'update_date', type: 'timestamp' })
+    public updatedAt: Date;
 
     public toString(): string {
         return `${this.firstName} ${this.lastName} (${this.email})`;
     }
 
     @BeforeInsert()
-    public async hashPassword(): Promise<void> {
-        this.password = await User.hashPassword(this.password);
+    public async beforeInsert(): Promise<void> {
+        this.password = await UserAccount.hashPassword(this.password);
+        this.createdAt = new Date();
+        this.updatedAt = new Date();
+    }
+
+    @BeforeUpdate()
+    public async beforeUpdate(): Promise<void> {
+        this.updatedAt = new Date();
     }
 
 }

@@ -7,7 +7,8 @@
     "start": "nps",
     "build": "npm start build",
     "presetup": "yarn install",
-    "setup": "npm start config && npm start setup.script"
+    "setup": "npm start config",
+    "dbSetup": "npm start setup.script"
   },
   "engines": {
     "node": ">=8.0.0"
@@ -52,7 +53,7 @@
     "typeorm": "^0.2.5",
     "typeorm-seeding": "^1.0.0-beta.6",
     "typeorm-typedi-extensions": "^0.2.1",
-    "typescript": "3.0.3",
+    "typescript": "3.3.3",
     "uuid": "^3.3.2",
     "winston": "3.1.0"
   },

@@ -10,6 +10,7 @@ export function authorizationChecker(connection: Connection): (action: Action, r
     const authService = Container.get<AuthService>(AuthService);
 
     return async function innerAuthorizationChecker(action: Action, roles: string[]): Promise<boolean> {
+
         const credentials = authService.parseBasicAuthFromRequest(action.request);
 
         if (credentials === undefined) {

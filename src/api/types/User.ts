@@ -3,7 +3,7 @@ import { Field, ID, ObjectType } from 'type-graphql';
 @ObjectType({
     description: 'User object.',
 })
-export class User {
+export class UserAccount {
 
     @Field(type => ID)
     public id: string;
