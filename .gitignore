@@ -27,5 +27,4 @@ tsconfig.build.json
 src/**/*.js
 src/**/*.js.map
 !src/public/**/*
-
 .env
