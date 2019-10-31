@@ -31,7 +31,7 @@ export class UserController {
     @Get('/:id')
     @OnUndefined(UserNotFoundError)
     public one(@Param('id') id: string): Promise<UserAccount | undefined> {
-        this.log.info('Create a new id => ', id);
+        this.log.info('Find a User => ', id);
         return this.userService.findOne(id);
     }
 
@@ -54,3 +54,5 @@ export class UserController {
     }
 
 }
+
+

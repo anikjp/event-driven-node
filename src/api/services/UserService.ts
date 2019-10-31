@@ -23,6 +23,7 @@ export class UserService {
 
     public findOne(id: string): Promise<UserAccount | undefined> {
         this.log.info('Find one user');
+        this.eventDispatcher.dispatch(events.user.search, id);
         return this.userRepository.findOne({ id });
     }
 

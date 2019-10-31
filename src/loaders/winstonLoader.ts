@@ -11,8 +11,9 @@ export const winstonLoader: MicroframeworkLoader = (settings: MicroframeworkSett
                 handleExceptions: true,
                 format: env.node !== 'development'
                     ? format.combine(
+                        format.align(),
                         format.colorize(),
-                        format.json()
+                        format.simple()
                     )
                     : format.combine(
                         format.colorize(),
