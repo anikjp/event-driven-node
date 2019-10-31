@@ -1,4 +1,4 @@
-# Rent-Me API with Express, Microframework & PostgreSQL
+# Express, Microframework & PostgreSQL
 
 ## Setup
 
