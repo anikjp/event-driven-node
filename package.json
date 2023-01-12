@@ -16,7 +16,7 @@
   "dependencies": {
     "bcrypt": "3.0.1",
     "chalk": "^2.4.1",
-    "class-validator": "^0.9.1",
+    "class-validator": "^0.14.0",
     "commander": "^2.19.0",
     "compression": "^1.7.1",
     "copyfiles": "^2.1.0",
